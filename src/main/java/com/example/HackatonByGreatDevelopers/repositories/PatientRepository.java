@@ -10,7 +10,7 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<Patient> findAll();
 
-//    @Query(value = "select new com.example.HackatonByGreatDevelopers.entity.PatientCard " +
-//            " (patients.id, )", nativeQuery = true)
-//    PatientCard getPatientCardById();
+    @Query(value = "select new com.example.HackatonByGreatDevelopers.entity.PatientCard " +
+            " (patients.id, )", nativeQuery = true)
+    PatientCard getPatientCardById();
 }
