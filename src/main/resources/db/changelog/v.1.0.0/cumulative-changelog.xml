@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="add-tag-1.0.0" author="God">
+        <tagDatabase tag="v.1.0.0"/>
+    </changeSet>
+
+    <changeSet id="create-tables" author="iles">
+        <createTable tableName="users">
+            <column name="user_id" type="java.lang.Long" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="email" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="password" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="roles" type="java.lang.Long" autoIncrement="false">
+                <constraints nullable="false" validateForeignKey="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="roles">
+            <column name="role_id" type="java.lang.Long" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="roles" constraintName="user_role_id"
+                                 referencedTableName="roles" referencedColumnNames="role_id"/>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_SUPER_ADMIN">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="admin">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="email" value="email">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="password" value="$2a$12$yzm8XDp2RZua0RF918mOTOCuJZHWoptuPbMvA02Ba3xvtKJajxmi2">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="roles" value="1">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="user">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="email" value="user">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="password" value="$2a$12$yzm8XDp2RZua0RF918mOTOCuJZHWoptuPbMvA02Ba3xvtKJajxmi2">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="roles" value="2">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="superAdmin">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="email" value="superAdmin">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="password" value="$2a$12$yzm8XDp2RZua0RF918mOTOCuJZHWoptuPbMvA02Ba3xvtKJajxmi2">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="roles" value="3">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
