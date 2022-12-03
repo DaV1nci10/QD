@@ -95,6 +95,20 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
+        <insert tableName="users">
+            <column name="username" value="980226350078">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="email" value="test@mail.ru">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="password" value="$2a$10$qh/iHYX6kEQO2PvwygwMR.w241vDzWqm1WIXHBSppHkbUhxXd5jHe">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="roles" value="2">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>
