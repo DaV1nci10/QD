@@ -4,6 +4,7 @@ import com.example.HackatonByGreatDevelopers.security.LoginRequest;
 import com.example.HackatonByGreatDevelopers.security.SignupRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.HackatonByGreatDevelopers.services.AuthService;
@@ -16,12 +17,16 @@ public class AuthController {
 
     private final AuthService authService;
 
+//    @GetMapping("/getUser")
+//    public ResponseEntity<?> getUser(){
+//        return ;
+//    }
+
     @PostMapping("/signIn")
     @Operation(summary = "Авторизация по username password из БД, при успешной авторизации генерирует токен")
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
         return authService.signIn(loginRequest);
     }
-
 
     @PostMapping("/signUp")
     @Operation(summary = "Регистрация нового User, требуется: username, email, password, roles")

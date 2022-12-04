@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/test/**", "/test/", "/patientCard/**");
         web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/test/**", "/api/test/**", "/api/**");
     }
 
@@ -61,13 +62,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-
+                .antMatchers("/anamnez/**").permitAll()
                 .antMatchers("/article/**").permitAll()
                 .antMatchers("/patient/**").permitAll()
                 .antMatchers("/patient").permitAll()
+                .antMatchers("/documents/**").permitAll()
                 .antMatchers("/test").permitAll()
+                .antMatchers("/a/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/firstTest/**").permitAll()
+                .antMatchers("/patientCard/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()

@@ -12,6 +12,10 @@ import java.util.List;
 public class PatientService {
     private final PatientRepository patientRepository;
 
+    public Patient savePatient(Patient patient){
+        return patientRepository.save(patient);
+    }
+
     public List<Patient> getAllPatients(){
         return patientRepository.findAll();
     }
