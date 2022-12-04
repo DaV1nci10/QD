@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/allergy")
 public class AllergyAnamnezController {
 
-    @GetMapping
+    @GetMapping("/test")
     public String str(){
         return "stt";
     }

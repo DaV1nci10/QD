@@ -2,12 +2,12 @@ package com.example.HackatonByGreatDevelopers.controllers;
 
 import com.example.HackatonByGreatDevelopers.entity.Phrase;
 import com.example.HackatonByGreatDevelopers.entity.SectionBody;
+import com.example.HackatonByGreatDevelopers.entity.User;
 import com.example.HackatonByGreatDevelopers.services.TestService;
+import com.example.HackatonByGreatDevelopers.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestForMaks {
 
+    @Autowired
+    private UserService userService;
     private final TestService testService;
-    @PostMapping
+    @PostMapping("/Check")
     public List<Phrase> firstTest(@RequestBody List<SectionBody> sections){
         List<String> list = testService.sectionDelimited(sections.get(0).getText());
         List<Phrase> replie = new ArrayList<>();
@@ -70,5 +72,10 @@ public class TestForMaks {
         if (isMatch(str))
             return 2;
         return 3;
+    }
+
+    @GetMapping("getAllByUserId/{id}")
+    public User getAllById(@PathVariable Long id){
+        return userService.getAllByUserId(id);
     }
 }
