@@ -26,6 +26,12 @@ public class ArticleController {
         return articleService.saveOne(article);
     }
 
+    @PostMapping("/saveList")
+    @Operation(summary = "Сохранение множества артиклей")
+    public List<Article> addArticle(@RequestBody List<Article> article) throws IOException {
+        return articleService.saveMany(article);
+    }
+
     @PostMapping("/search")
     @Operation(summary = "Поиск всех фраз по секции")
     public List<Article> search(@RequestBody Article article) throws IOException{

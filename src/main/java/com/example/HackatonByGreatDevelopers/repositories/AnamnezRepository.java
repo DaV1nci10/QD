@@ -14,6 +14,7 @@ public interface AnamnezRepository extends JpaRepository<Anamnez, Long> {
     @Query(value = "select * from anamnezs a where a.patient_id=:id", nativeQuery = true)
     List<Anamnez> findAllById(@Param("id") Long id);
 
+    List<Anamnez> findAnamnezByAnamnezName(String name);
 
 //    @Query(value = "select * from anamnezs a where a.patient_id=id", nativeQuery = true)
 //    PatientCard getPatientCardById(@Param("id") Long id);

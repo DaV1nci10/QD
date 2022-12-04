@@ -28,6 +28,13 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
+    public List<Article> saveMany(List<Article> article){
+        for (int i = 0; i < article.size(); i++) {
+            articleRepository.save(article.get(i));
+        }
+        return article;
+    }
+
     public List<String> searchPhrasesByArticleName(String articleName) throws IOException {
         SearchRequest searchRequest = new SearchRequest("article");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();

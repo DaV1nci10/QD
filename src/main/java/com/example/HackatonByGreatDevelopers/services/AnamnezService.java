@@ -20,4 +20,8 @@ public class AnamnezService {
         Patient patient = patientRepository.findPatientByIin(iin);
         return anamnezRepository.findAllById(patient.getPatient_id());
     }
+
+    public List<Anamnez> getAllAnamnezByName(String name){
+        return anamnezRepository.findAnamnezByAnamnezName(name);
+    }
 }
