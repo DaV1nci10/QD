@@ -8,7 +8,7 @@
         <tagDatabase tag="v.1.0.0"/>
     </changeSet>
 
-    <changeSet id="create-tables" author="iles">
+    <changeSet id="create-tables1" author="iles">
         <createTable tableName="patients">
             <column name="patient_id" type="java.lang.Long" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -17,9 +17,12 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>
-        <createTable tableName="allergy_anamnez">
+        <createTable tableName="anamnezs">
             <column name="id" type="java.lang.Long" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="anamnez_name" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="doctor" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
@@ -34,113 +37,60 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>
-        <createTable tableName="contraindications">
+        <createTable tableName="documents">
             <column name="id" type="java.lang.Long" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="iin" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="fio" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="dob" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="doctor" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="editable" type="java.lang.boolean" autoIncrement="false">
+            <column name="date_of_creation" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="content" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="patient_id" type="java.lang.Long" autoIncrement="false">
+            <column name="text" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>
-        <createTable tableName="frist_watch">
-            <column name="id" type="java.lang.Long" autoIncrement="true">
+        <createTable tableName="patient_cards">
+            <column name="patient_id" type="java.lang.Long" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="doctor" type="java.lang.String" autoIncrement="false">
+            <column name="iin" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="editable" type="java.lang.boolean" autoIncrement="false">
+            <column name="created_at" type="date" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="content" type="java.lang.String" autoIncrement="false">
+            <column name="fio" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="patient_id" type="java.lang.Long" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="ill_anamnez">
-            <column name="id" type="java.lang.Long" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="doctor" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="editable" type="java.lang.boolean" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="content" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="patient_id" type="java.lang.Long" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="life_anamnez">
-            <column name="id" type="java.lang.Long" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="doctor" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="editable" type="java.lang.boolean" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="content" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="patient_id" type="java.lang.Long" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="main_info">
-            <column name="id" type="java.lang.Long" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="doctor" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="editable" type="java.lang.boolean" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="content" type="java.lang.String" autoIncrement="false">
-                <constraints nullable="false" primaryKey="false"/>
-            </column>
-            <column name="patient_id" type="java.lang.Long" autoIncrement="false">
+            <column name="dob" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="allergy_anamnez" baseColumnNames="patient_id" constraintName="allergy_patient_id"
+        <addForeignKeyConstraint baseTableName="anamnezs" baseColumnNames="patient_id" constraintName="anamnez_patient_id"
                                  referencedTableName="patients" referencedColumnNames="patient_id"/>
-        <addForeignKeyConstraint baseTableName="contraindications" baseColumnNames="patient_id" constraintName="allergy_patient_id"
-                                 referencedTableName="patients" referencedColumnNames="patient_id"/>
-        <addForeignKeyConstraint baseTableName="frist_watch" baseColumnNames="patient_id" constraintName="allergy_patient_id"
-                                 referencedTableName="patients" referencedColumnNames="patient_id"/>
-        <addForeignKeyConstraint baseTableName="ill_anamnez" baseColumnNames="patient_id" constraintName="allergy_patient_id"
-                                 referencedTableName="patients" referencedColumnNames="patient_id"/>
-        <addForeignKeyConstraint baseTableName="life_anamnez" baseColumnNames="patient_id" constraintName="allergy_patient_id"
-                                 referencedTableName="patients" referencedColumnNames="patient_id"/>
-        <addForeignKeyConstraint baseTableName="main_info" baseColumnNames="patient_id" constraintName="allergy_patient_id"
-                                 referencedTableName="patients" referencedColumnNames="patient_id"/>
+
 
         <insert tableName="patients">
-            <column name="patient_id" value="1">
-            </column>
             <column name="iin" value="980226350078">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
-        <insert tableName="allergy_anamnez">
+        <insert tableName="anamnezs">
+            <column name="anamnez_name" value="Жалобы">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="doctor" value="Никифоров Валерий Юрьевич">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -154,7 +104,10 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
-        <insert tableName="contraindications">
+        <insert tableName="anamnezs">
+            <column name="anamnez_name" value="Анамнез Жизни">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="doctor" value="Никифоров Валерий Юрьевич">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -168,7 +121,10 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
-        <insert tableName="frist_watch">
+        <insert tableName="anamnezs">
+            <column name="anamnez_name" value="Анамнез Заболевания">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="doctor" value="Никифоров Валерий Юрьевич">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -182,7 +138,10 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
-        <insert tableName="ill_anamnez">
+        <insert tableName="anamnezs">
+            <column name="anamnez_name" value="Первичный осмотр">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="doctor" value="Никифоров Валерий Юрьевич">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -196,7 +155,10 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
-        <insert tableName="life_anamnez">
+        <insert tableName="anamnezs">
+            <column name="anamnez_name" value="Данные иследования">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="doctor" value="Никифоров Валерий Юрьевич">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -210,7 +172,10 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
         </insert>
-        <insert tableName="main_info">
+        <insert tableName="anamnezs">
+            <column name="anamnez_name" value="противопоказания">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="doctor" value="Никифоров Валерий Юрьевич">
                 <constraints nullable="false" primaryKey="false"/>
             </column>

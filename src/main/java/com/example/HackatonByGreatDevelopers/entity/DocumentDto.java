@@ -3,18 +3,15 @@ package com.example.HackatonByGreatDevelopers.entity;
 import lombok.Data;
 import org.w3c.dom.Text;
 
-import javax.persistence.Id;
-import java.util.Date;
+import java.util.List;
 
-@org.springframework.data.elasticsearch.annotations.Document(createIndex = true, indexName = "documents")
 @Data
-public class Document {
-    @Id
+public class DocumentDto {
     private String id;
     private String iin;
     private String fio;
     private String dob;
     private String doctor;
     private String dateOfCreation;
-    private String text;
+    private List<SectionBody> sections;
 }
