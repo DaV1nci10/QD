@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.example.HackatonByGreatDevelopers.services.UserDetailsImplService;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -50,16 +51,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/test/**", "/test/", "/patientCard/**");
-        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/test/**", "/api/test/**", "/api/**");
+        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/test/**",
+                "/test/", "/patientCard/**", "/api/test/**", "/api/**");
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.httpBasic();
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        http.cors().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).
+                ignoringAntMatchers("/firstTest/search").ignoringAntMatchers("/test").disable();
+        http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/anamnez/**").permitAll()
@@ -69,6 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/documents/**").permitAll()
                 .antMatchers("/test").permitAll()
                 .antMatchers("/a/**").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/firstTest/**").permitAll()
                 .antMatchers("/patientCard/**").permitAll()

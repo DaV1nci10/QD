@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,13 +27,12 @@ public class DocumentService {
     private final AnamnezRepository anamnezRepository;
     public ResponseEntity<?> saveDoc(DocumentDto documentDto){
         String text = getTextFromDto(documentDto.getSections());
-        System.out.println(text);
         Document document = new Document();
         document.setIin(documentDto.getIin());
         document.setFio(documentDto.getFio());
         document.setDob(documentDto.getDob());
         document.setDoctor(documentDto.getDoctor());
-        document.setDateOfCreation(documentDto.getDateOfCreation());
+        document.setDateOfCreation(String.valueOf(LocalDateTime.now()));
         document.setText(text);
 
 

@@ -2,6 +2,7 @@ package com.example.HackatonByGreatDevelopers.entity;
 
 import com.example.HackatonByGreatDevelopers.model.*;
 import lombok.Data;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -24,6 +24,7 @@ public class DocumentsController {
     }
 
     @GetMapping("{iin}")
+    @Operation(summary = "Получение всех документов на основе ИИН пациента")
     List<Document> getDocumentsById(@PathVariable String iin){
         return documentService.getDocumentsById(iin);
     }

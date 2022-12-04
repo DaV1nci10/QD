@@ -7,7 +7,6 @@ import java.util.List;
 
 @Data
 public class DocumentDto {
-    private String id;
     private String iin;
     private String fio;
     private String dob;

@@ -22,6 +22,9 @@
             <column name="password" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
+            <column name="fio" type="java.lang.String" autoIncrement="false">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="roles" type="java.lang.Long" autoIncrement="false">
                 <constraints nullable="false" validateForeignKey="true"/>
             </column>
@@ -63,6 +66,9 @@
             <column name="password" value="$2a$12$yzm8XDp2RZua0RF918mOTOCuJZHWoptuPbMvA02Ba3xvtKJajxmi2">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
+            <column name="fio" value="Александр Иванов Иванович">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="roles" value="1">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -75,6 +81,9 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="password" value="$2a$12$yzm8XDp2RZua0RF918mOTOCuJZHWoptuPbMvA02Ba3xvtKJajxmi2">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="fio" value="Александр Александр Александр">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="roles" value="2">
@@ -91,6 +100,9 @@
             <column name="password" value="$2a$12$yzm8XDp2RZua0RF918mOTOCuJZHWoptuPbMvA02Ba3xvtKJajxmi2">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
+            <column name="fio" value="Иванов Иван Иваныч">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
             <column name="roles" value="3">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
@@ -103,6 +115,9 @@
                 <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="password" value="$2a$10$qh/iHYX6kEQO2PvwygwMR.w241vDzWqm1WIXHBSppHkbUhxXd5jHe">
+                <constraints nullable="false" primaryKey="false"/>
+            </column>
+            <column name="fio" value="Кирилл Фронт Енд">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="roles" value="2">

@@ -17,10 +17,6 @@ public class AuthController {
 
     private final AuthService authService;
 
-//    @GetMapping("/getUser")
-//    public ResponseEntity<?> getUser(){
-//        return ;
-//    }
 
     @PostMapping("/signIn")
     @Operation(summary = "Авторизация по username password из БД, при успешной авторизации генерирует токен")

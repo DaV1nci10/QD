@@ -1,6 +1,7 @@
 package com.example.HackatonByGreatDevelopers.controllers;
 
 import com.example.HackatonByGreatDevelopers.model.Article;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.example.HackatonByGreatDevelopers.repositories.ArticleRepository;
@@ -20,11 +21,13 @@ public class ArticleController {
     private final ArticleRepository articleRepository;
 
     @PostMapping("/save")
+    @Operation(summary = "Сохранение артикля")
     public Article addArticle(@RequestBody Article article) throws IOException {
         return articleService.saveOne(article);
     }
 
     @PostMapping("/search")
+    @Operation(summary = "Поиск всех фраз по секции")
     public List<Article> search(@RequestBody Article article) throws IOException{
         return articleRepository.findAllByTitle(article.getTitle());
     }
