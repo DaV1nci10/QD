@@ -10,7 +10,7 @@
 
     <changeSet id="create-tables" author="iles">
         <createTable tableName="users">
-            <column name="user_id" type="java.lang.Long" autoIncrement="true">
+            <column name="id" type="java.lang.Long" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="username" type="java.lang.String" autoIncrement="false">

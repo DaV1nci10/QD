@@ -1,10 +1,11 @@
 version: "3.9"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
     ports:
       - "9200:9200"
       - "9300:9300"
+    mem_limit: 1024m
     environment:
       - discovery.type=single-node
       - cluster.name=HakatonDevelopers
@@ -12,5 +13,6 @@ services:
       - elasticsearch-data:/usr/share/elasticsearch/data
       - ./analysis:/usr/share/elasticsearch/config/analysis
     restart: unless-stopped
+
 volumes:
   elasticsearch-data:

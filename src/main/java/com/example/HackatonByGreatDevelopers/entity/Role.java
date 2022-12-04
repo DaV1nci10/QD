@@ -20,4 +20,9 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private EnumRole name;
+
+    @Override
+    public String toString() {
+        return name.name();
+    }
 }
