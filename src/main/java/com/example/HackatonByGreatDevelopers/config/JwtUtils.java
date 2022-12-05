@@ -13,7 +13,9 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class JwtUtils {
+public class
+
+JwtUtils {
 
     private final String jwtSecret = "esekretjknafsafngoiajgroaeigrjoszgasdokgawpora2swfqead";
 

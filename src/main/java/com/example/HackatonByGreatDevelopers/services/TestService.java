@@ -47,8 +47,10 @@ public class TestService {
             String delimiter = matcher.group();
             lastUsedIndex = matcher.end();
             if (!phraseString.equals("")) {
-                if (listOfSectionPhrases.stream().anyMatch(l -> l.equals(phraseString)))
-                    phrases.add(new Phrase(phraseString, true, null, false));
+                if (listOfSectionPhrases.stream().anyMatch(l -> l.equals(phraseString))) {
+                    List<String> suggest = searchForSuggestList(section.getSectionCode(), phraseString, "article");
+                    phrases.add(new Phrase(phraseString, true, suggest, false));
+                }
                 else {
                     List<String> suggest = searchForSuggestList(section.getSectionCode(), phraseString, "article");
                     phrases.add(new Phrase(phraseString, false, suggest, false));
@@ -63,7 +65,7 @@ public class TestService {
         SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.boolQuery()
-                .must(QueryBuilders.multiMatchQuery(searchName, "text").fuzziness(1))
+                .must(QueryBuilders.multiMatchQuery(searchName, "text").fuzziness(3))
                 .must(QueryBuilders.multiMatchQuery(articleName, "title")
                 ));
         searchRequest.source(searchSourceBuilder);
