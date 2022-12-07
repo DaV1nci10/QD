@@ -2,12 +2,11 @@ package com.example.HackatonByGreatDevelopers.controllers;
 
 import com.example.HackatonByGreatDevelopers.security.LoginRequest;
 import com.example.HackatonByGreatDevelopers.security.SignupRequest;
+import com.example.HackatonByGreatDevelopers.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.HackatonByGreatDevelopers.services.AuthService;
 
 @RestController
 @RequestMapping("api/auth")

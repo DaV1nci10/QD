@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface DocumentRepository extends ElasticsearchRepository<Document, String> {
 
-
     List<Document> getDocumentsByIin(String iin);
 }

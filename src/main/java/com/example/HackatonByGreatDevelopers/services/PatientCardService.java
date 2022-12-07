@@ -8,6 +8,8 @@ import com.example.HackatonByGreatDevelopers.repositories.SearchPatientDtoReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class PatientCardService {
@@ -16,28 +18,29 @@ public class PatientCardService {
     private final AnamnezService anamnezService;
     private final SearchPatientDtoRepository searchPatientDtoRepository;
 
-    public PatientCard savePatientCard(PatientCard patientCard){
+    public PatientCard savePatientCard(PatientCard patientCard) throws Exception {
         SearchPatient patientDto = new SearchPatient();
+//        patientCardRepository.findByIin(patientCard.getIin()).orElseThrow(()->new Exception("allready exist"));
         patientDto.setFio(patientCard.getFio());
         patientDto.setIin(patientCard.getIin());
         searchPatientDtoRepository.save(patientDto);
         return patientCardRepository.save(patientCard);
     }
 
-    public boolean isPatientCard(PatientCard patientCard){
-        if (patientCardRepository.findByIin(patientCard.getIin()) != null)
-            return true;
-        return false;
+    public boolean isPatientCard(PatientCard patientCard) throws Exception {
+        patientCardRepository.findByIin(patientCard.getIin()).orElseThrow(()->new Exception("allready exist"));
+        return true;
     }
 
-    public PatientCardDto getPatientCardDto(String iin){
+    public PatientCardDto getPatientCardDto(String iin) throws Exception {
         PatientCardDto patientCardDto = new PatientCardDto();
-        patientCardDto.setPatientCard(patientCardRepository.findByIin(iin));
+        PatientCard patientCard = patientCardRepository.findByIin(iin).orElseThrow(()->new Exception("no such PatientCard"));
+        patientCardDto.setPatientCard(patientCard);
         patientCardDto.setAnamnezs(anamnezService.getAllByIin(iin));
         return patientCardDto;
     }
 
-    public PatientCard findByIin(String iin){
+    public Optional<PatientCard> findByIin(String iin){
         return patientCardRepository.findByIin(iin);
     }
 

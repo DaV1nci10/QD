@@ -14,7 +14,9 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +26,6 @@ public class TestService {
 
     private final ArticleService articleService;
     private final RestHighLevelClient esClient;
-    public List<String> listOfSectionIll = new ArrayList<>();
 
     public List<Section> test(List<SectionBody> sectionBodyList) throws IOException {
         List<Section> resultItIs = new ArrayList<>();

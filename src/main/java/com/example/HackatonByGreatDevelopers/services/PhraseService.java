@@ -1,7 +1,5 @@
 package com.example.HackatonByGreatDevelopers.services;
 
-import com.example.HackatonByGreatDevelopers.model.Article;
-import com.example.HackatonByGreatDevelopers.repositories.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -19,34 +17,18 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class ArticleService {
+public class PhraseService {
 
-    private final ArticleRepository articleRepository;
     private final RestHighLevelClient esClient;
 
-    public Article saveOne(Article article){
-        return articleRepository.save(article);
-    }
-
-    public List<Article> saveMany(List<Article> article){
-        for (int i = 0; i < article.size(); i++) {
-            articleRepository.save(article.get(i));
-        }
-        return article;
-    }
-
-    public List<String> searchPhrasesByArticleName(String articleName) throws IOException {
-        SearchRequest searchRequest = new SearchRequest("article");
+    public List<String> searchForSuggestList(String searchName, String index) throws IOException {
+        SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.multiMatchQuery(articleName, "title"));
-
-        searchSourceBuilder.from(0);
-        searchSourceBuilder.size(20);
-
+        searchSourceBuilder.query(QueryBuilders.matchQuery("text", searchName));
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = esClient.search(searchRequest, RequestOptions.DEFAULT);
         List<String> list = new ArrayList<>();
-        for (SearchHit hit : searchResponse.getHits().getHits()){
+        for (SearchHit hit : searchResponse.getHits().getHits()) {
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
             list.add((String) sourceAsMap.get("text"));
         }

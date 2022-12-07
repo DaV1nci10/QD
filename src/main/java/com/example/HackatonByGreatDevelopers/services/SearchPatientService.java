@@ -1,9 +1,6 @@
-package com.example.HackatonByGreatDevelopers.controllers;
+package com.example.HackatonByGreatDevelopers.services;
 
-import com.example.HackatonByGreatDevelopers.entity.*;
-import com.example.HackatonByGreatDevelopers.services.TestService;
-import com.example.HackatonByGreatDevelopers.services.UserService;
-import io.swagger.v3.oas.annotations.Operation;
+import com.example.HackatonByGreatDevelopers.entity.SearchPatient;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -13,34 +10,19 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.WildcardQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/firstTest")
+@Service
 @RequiredArgsConstructor
-public class TestForMaks {
+public class SearchPatientService {
 
-    @Autowired
-    private UserService userService;
+
     private final RestHighLevelClient esClient;
-
-    @GetMapping("getAllByUserId/{id}")
-    public User getAllById(@PathVariable Long id){
-        return userService.getAllByUserId(id);
-    }
-
-    @Operation(summary = "Умный поиск всех пациентов по ИИН. В поисковом поле отображение автозаполнения")
-    @PostMapping("/search")
-    List<SearchPatient> getPatientsSearch(@RequestBody MyString str) throws IOException {
-        return getSearchPatients(str.getSearchName(), "search");
-    }
-
     public List<SearchPatient> getSearchPatients(String searchName, String index) throws IOException {
         SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();

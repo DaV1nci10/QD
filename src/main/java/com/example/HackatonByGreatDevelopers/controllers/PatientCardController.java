@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("test/patientCard")
@@ -16,15 +18,14 @@ public class PatientCardController {
 
     @PostMapping("/save")
     @Operation(summary = "Сохранение/Создание новой карточки пациента")
-    PatientCard savePatientCard(@RequestBody PatientCard patientCard){
-        if (patientCardService.isPatientCard(patientCard))
-             return patientCardService.findByIin(patientCard.getIin());
-        return patientCardService.savePatientCard(patientCard);
+    Optional<PatientCard> savePatientCard(@RequestBody PatientCard patientCard) throws Exception {
+        patientCardService.savePatientCard(patientCard);
+        return patientCardService.findByIin(patientCard.getIin());
     }
 
     @GetMapping("/getPatientCardDto/{iin}")
     @Operation(summary = "Получение карточки пациента на основании ИИН пациента")
-    PatientCardDto getPatientCardDto(@PathVariable String iin){
+    PatientCardDto getPatientCardDto(@PathVariable String iin) throws Exception {
         return patientCardService.getPatientCardDto(iin);
     }
 

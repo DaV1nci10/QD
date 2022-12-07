@@ -2,20 +2,17 @@ package com.example.HackatonByGreatDevelopers.services;
 
 import com.example.HackatonByGreatDevelopers.entity.Document;
 import com.example.HackatonByGreatDevelopers.entity.DocumentDto;
-import com.example.HackatonByGreatDevelopers.entity.Section;
 import com.example.HackatonByGreatDevelopers.entity.SectionBody;
 import com.example.HackatonByGreatDevelopers.model.Anamnez;
 import com.example.HackatonByGreatDevelopers.repositories.AnamnezRepository;
 import com.example.HackatonByGreatDevelopers.repositories.DocumentRepository;
 import com.example.HackatonByGreatDevelopers.repositories.PatientRepository;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.common.text.Text;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
