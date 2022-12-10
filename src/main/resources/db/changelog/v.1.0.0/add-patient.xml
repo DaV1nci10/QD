@@ -67,7 +67,7 @@
             <column name="iin" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
-            <column name="created_at" type="date" autoIncrement="false">
+            <column name="created_at" type="java.lang.String" autoIncrement="false">
                 <constraints nullable="false" primaryKey="false"/>
             </column>
             <column name="fio" type="java.lang.String" autoIncrement="false">

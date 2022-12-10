@@ -23,9 +23,15 @@ public class DocumentsController {
         return documentService.saveDoc(documentDto);
     }
 
+    @PostMapping("/save/several")
+    @Operation(summary = "Добавление документа в БД")
+    ResponseEntity<?> saveSeveralDocuments(@RequestBody List<DocumentDto> documentDtos){
+        return documentService.saveSeveralDocs(documentDtos);
+    }
+
     @GetMapping("{iin}")
     @Operation(summary = "Получение всех документов на основе ИИН пациента")
     List<Document> getDocumentsById(@PathVariable String iin){
-        return documentService.getDocumentsById(iin);
+        return documentService.getDocumentsByIin(iin);
     }
 }

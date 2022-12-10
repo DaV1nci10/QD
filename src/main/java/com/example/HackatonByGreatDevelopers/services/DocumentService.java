@@ -33,19 +33,25 @@ public class DocumentService {
         document.setText(text);
 
 
-        for(int i = 0; i < documentDto.getSections().size(); i++){
-            Anamnez anamnez = new Anamnez();
-            anamnez.setAnamnezName(documentDto.getSections().get(i).getSectionCode());
-            anamnez.setDoctor(document.getDoctor());
-            anamnez.setEditable(true);
-            anamnez.setContent(documentDto.getSections().get(i).getText());
-            anamnez.setPatient_id(patientRepository.findPatientByIin(documentDto.getIin()));
-            anamnezRepository.save(anamnez);
-        }
+//        for(int i = 0; i < documentDto.getSections().size(); i++){
+//            Anamnez anamnez = new Anamnez();
+//            anamnez.setAnamnezName(documentDto.getSections().get(i).getSectionCode());
+//            anamnez.setDoctor(document.getDoctor());
+//            anamnez.setEditable(true);
+//            anamnez.setContent(documentDto.getSections().get(i).getText());
+//            anamnez.setPatient_id(patientRepository.findPatientByIin(documentDto.getIin()).get());
+//            anamnezRepository.save(anamnez);
+//        }
 
         return ResponseEntity.ok(documentRepository.save(document));
     }
 
+    public ResponseEntity<?> saveSeveralDocs(List<DocumentDto> documentDtos) {
+        for (int i = 0; i < documentDtos.size(); i++){
+            saveDoc(documentDtos.get(i));
+        }
+        return ResponseEntity.ok(documentDtos);
+    }
     String getTextFromDto(List<SectionBody> sections){
         String text = new String();
         for (int i = 0; i< sections.size(); i++) {
@@ -55,9 +61,10 @@ public class DocumentService {
         return text;
     }
 
-    public List<Document> getDocumentsById(String iin){
+    public List<Document> getDocumentsByIin(String iin){
         return documentRepository.getDocumentsByIin(iin);
     }
 
+                                    
 
 }

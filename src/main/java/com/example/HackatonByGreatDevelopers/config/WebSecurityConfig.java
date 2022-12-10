@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/test/**",
-                "/test/", "/patientCard/**", "/api/test/**", "/api/**", "/phrases/**");
+                "/test/", "/patientCard/**", "/api/test/**", "/api/**", "/phrases/**", "/analyst/**");
 
     }
 
@@ -71,6 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/patient").permitAll()
                 .antMatchers("/documents/**").permitAll()
                 .antMatchers("/test").permitAll()
+                .antMatchers("/analyst/**").permitAll()
                 .antMatchers("/a/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/test/**").permitAll()

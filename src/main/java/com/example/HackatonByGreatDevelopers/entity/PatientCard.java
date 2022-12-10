@@ -16,7 +16,7 @@ public class PatientCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patient_id;
     private String iin;
-    private Date createdAt;
+    private String createdAt;
     private String fio;
     private String dob;
 }

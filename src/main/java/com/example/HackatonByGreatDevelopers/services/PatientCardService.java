@@ -8,6 +8,8 @@ import com.example.HackatonByGreatDevelopers.repositories.SearchPatientDtoReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -15,16 +17,21 @@ import java.util.Optional;
 public class PatientCardService {
 
     private final PatientCardRepository patientCardRepository;
-    private final AnamnezService anamnezService;
+    private final DocumentService documentService;
     private final SearchPatientDtoRepository searchPatientDtoRepository;
 
     public PatientCard savePatientCard(PatientCard patientCard) throws Exception {
         SearchPatient patientDto = new SearchPatient();
-//        patientCardRepository.findByIin(patientCard.getIin()).orElseThrow(()->new Exception("allready exist"));
-        patientDto.setFio(patientCard.getFio());
-        patientDto.setIin(patientCard.getIin());
-        searchPatientDtoRepository.save(patientDto);
-        return patientCardRepository.save(patientCard);
+        Optional<PatientCard> testPatient = patientCardRepository.findByIin(patientCard.getIin());
+        if (testPatient.isPresent())
+            throw new Exception("patient already exist");
+        else{
+            patientDto.setFio(patientCard.getFio());
+            patientDto.setIin(patientCard.getIin());
+            searchPatientDtoRepository.save(patientDto);
+            patientCard.setCreatedAt(String.valueOf(LocalDateTime.now()));
+            return patientCardRepository.save(patientCard);
+        }
     }
 
     public boolean isPatientCard(PatientCard patientCard) throws Exception {
@@ -36,7 +43,7 @@ public class PatientCardService {
         PatientCardDto patientCardDto = new PatientCardDto();
         PatientCard patientCard = patientCardRepository.findByIin(iin).orElseThrow(()->new Exception("no such PatientCard"));
         patientCardDto.setPatientCard(patientCard);
-        patientCardDto.setAnamnezs(anamnezService.getAllByIin(iin));
+        patientCardDto.setDocuments(documentService.getDocumentsByIin(iin));
         return patientCardDto;
     }
 

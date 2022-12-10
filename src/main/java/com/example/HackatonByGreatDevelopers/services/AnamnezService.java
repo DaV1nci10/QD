@@ -7,7 +7,9 @@ import com.example.HackatonByGreatDevelopers.repositories.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +18,10 @@ public class AnamnezService {
     private final PatientRepository patientRepository;
 
     public List<Anamnez> getAllByIin(String iin){
-        Patient patient = patientRepository.findPatientByIin(iin);
-        return anamnezRepository.findAllById(patient.getPatient_id());
+        Optional<Patient> patient = patientRepository.findPatientByIin(iin);
+        if (!patient.isPresent())
+            return new ArrayList<>();
+        return anamnezRepository.findAllById(patient.get().getPatient_id());
     }
 
     public List<Anamnez> getAllAnamnezByName(String name){

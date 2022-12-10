@@ -21,6 +21,12 @@ public class PatientController {
         return patientService.savePatient(patient);
     }
 
+    @PostMapping("/save/several")
+    @Operation(summary = "Добавление пациента")
+    public List<Patient> saveSeveralPatients(@RequestBody List<Patient> patients){
+        return patientService.saveSeveralPatients(patients);
+    }
+
     @GetMapping("/all")
     @Operation(summary = "Получение всех пациентов")
     public List<Patient> getAllPatients(){

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/firstTest")
+@RequestMapping("/searchPatients")
 @RequiredArgsConstructor
 public class SearchPatientController {
 
